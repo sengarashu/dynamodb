@@ -1,0 +1,17 @@
+AWS CLI Commands for DynamoDb Schema Backup and Recreate using AWS CLI
+ 
+aws dynamodb describe-table --table-name $table-name | jq '.Table | del(.TableId, .TableArn, .ItemCount, .TableSizeBytes, .CreationDateTime, .TableStatus, .LatestStreamArn, .LatestStreamLabel, .ProvisionedThroughput.NumberOfDecreasesToday, .ProvisionedThroughput.LastIncreaseDateTime)' > schema.json
+aws dynamodb delete-table --table-name $table-name
+aws dynamodb create-table --cli-input-json file://schema.json
+
+Table: DeviceDetail
+
+cd /Users/abhishek/Documents/Projects/BlueAir/AWS-Credentials/DynamoDB
+aws dynamodb describe-table --table-name DeviceDetail | jq '.Table | del(.TableId, .TableArn, .ItemCount, .TableSizeBytes, .CreationDateTime, .TableStatus, .LatestStreamArn, .LatestStreamLabel, .ProvisionedThroughput.NumberOfDecreasesToday, .ProvisionedThroughput.LastIncreaseDateTime)' > DeviceDetail-schema.json
+aws dynamodb delete-table --table-name DeviceDetail
+
+Table : dev_cloud-PersistentSystem
+
+cd /Users/abhishek/Documents/Projects/BlueAir/AWS-Credentials/DynamoDB
+aws dynamodb describe-table --table-name dev_cloud-PersistentSystem | jq '.Table | del(.TableId, .TableArn, .ItemCount, .TableSizeBytes, .CreationDateTime, .TableStatus, .LatestStreamArn, .LatestStreamLabel, .ProvisionedThroughput.NumberOfDecreasesToday, .ProvisionedThroughput.LastIncreaseDateTime)' > dev_cloud-PersistentSystem-schema.json
+aws dynamodb delete-table --table-name dev_cloud-PersistentSystem
